@@ -16,7 +16,7 @@
   },
   "name": "node",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Fullstack Social Netwoking Service** - A full-featured app built with the MERN stack (MongoDB, Express, React, Node). The app is responsive, supports light/dark themes, and implements full user functionality: authentication, profiles, posts, comments, likes, following, notifications, and media uploads.",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
@@ -25,5 +25,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fwrwxx/fullstack-mern-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fwrwxx/fullstack-mern-app/issues"
+  },
+  "homepage": "https://github.com/fwrwxx/fullstack-mern-app#readme"
 }
