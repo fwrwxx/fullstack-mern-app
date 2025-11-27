@@ -34,11 +34,18 @@ const Navbar = () => {
         <FlexBetween padding="1rem 6%" backgroundColor={alt}>
             <FlexBetween gap="1.75rem">
                 <Typography
-                fontWeight="bold"
-                fontSize="clamp(1rem, 2rem, 2.25rem)"
-                color="primary"
-                onClick={() => navigate("/home")}
-                sx={{ "&:hover": { cursor: "pointer", color: primaryLight } }}
+                    fontWeight="bold"
+                    fontSize="clamp(1rem, 2rem, 2.25rem)"
+                    sx={{
+                        color: "primary.main",
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                        cursor: "pointer",
+                        color: "#D395FF",
+                        transform: "scale(1.05)",
+                        },
+                    }}
+                    onClick={() => navigate("/home")}
                 >
                     Loop
                 </Typography>
@@ -113,7 +120,7 @@ const Navbar = () => {
                 >
                     {/* CLOSE ICON */}
                     <Box display="flex" justifyContent="flex-end" p="1rem">
-                        <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}><Close />
+                        <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
                             <Close />
                         </IconButton>
                     </Box>
