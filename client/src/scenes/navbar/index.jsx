@@ -1,5 +1,5 @@
-import { use } from "react";
-import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery, Icon } from "@mui/material";
+import { useState } from "react";
+import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from "@mui/material";
 import {
     Search,
     Message,
@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setMode, setLogout } from "../../state/authSlice";
+import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/flexBetween";
 
@@ -28,7 +28,7 @@ const Navbar = () => {
     const background = theme.palette.background.default;
     const primaryLight = theme.palette.primary.light;
     const alt = theme.palette.background.alt;
-    const fullName = `${user.firstName} ${user.lastName}`;
+    const fullName = `${user?.firstName || ""} ${user?.lastName || ""}`.trim();
 
     return (
         <FlexBetween padding="1rem 6%" backgroundColor={alt}>
