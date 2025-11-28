@@ -23,7 +23,7 @@ const registerSchema = yup.object().shape({
     password: yup.string().required("required"),
     location: yup.string().required("required"),
     occupation: yup.string().required("required"),
-    picture: yup.string().required("required"),
+    picture: yup.mixed().required("required"),
 });
 
 const LoginSchema = yup.object().shape({
@@ -38,7 +38,7 @@ const initialValuesRegister = {
     password: "",
     location: "",
     occupation: "",
-    picture: "",
+    picture: null,
 };
 
 const initialValuesLogin = {
@@ -61,7 +61,7 @@ const Form = () => {
             formData.append(value, values[value]);
         }
 
-        formData.append("picturePath", values.picture.name);
+        formData.append("picturePath", values.picture?.name || "");
 
         const savedUserResponse = await fetch("http://localhost:3001/auth/register", {
             method: "POST",
@@ -77,22 +77,33 @@ const Form = () => {
 
     };
     const login = async (values, onSubmitProps) => {
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
-        });
-        const loggedIn = await loggedInResponse.json();
-        onSubmitProps.resetForm();
-        if (loggedIn) {
+        try {
+            const res = await fetch("http://localhost:3001/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+            });
+
+            if (!res.ok) {
+                const errorMessage = await res.text();
+                console.error("LOGIN ERROR:", errorMessage);
+                return;
+            }
+
+            const data = await res.json();
+
             dispatch(
                 setLogin({
-                    user: loggedIn.user,
-                    token: loggedIn.token,
+                    user: data.user,
+                    token: data.token,
                 })
             );
+
+            onSubmitProps.resetForm();
             navigate("/home");
-        };
+        } catch (err) {
+            console.error("FAILED TO FETCH:", err);
+        }
     };
 
     const handleFormSubmit = async (values, onSubmitProps) => {
@@ -109,6 +120,7 @@ const Form = () => {
             onSubmit={handleFormSubmit}
             initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
             validationSchema={isLogin ? LoginSchema : registerSchema}
+            enableReinitialize={true}
         >
             {({
                 values,
