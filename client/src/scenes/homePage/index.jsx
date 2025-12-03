@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import UserWidget from "scenes/widgets/UserWidget";
 import MyPost from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
+import AdvertWidget from "scenes/widgets/AdvertWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
 
 const HomePage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -31,7 +33,9 @@ const HomePage = () => {
 
                 {isNonMobileScreens && (
                     <Box flexBasis="26%">
-                        {/* Additional widgets for non-mobile screens will be added here */}
+                        <AdvertWidget />
+                        <Box m="2rem 0" />
+                        <FriendListWidget userId={_id} />
                     </Box>
                 )}
             </Box>
