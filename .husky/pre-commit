@@ -1,0 +1,57 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "=== Pre-commit checks ==="
+echo ""
+
+# Client checks
+echo "1.Checking client..."
+if [ -d "client" ]; then
+    cd client
+    
+    echo "Auto-formatting with Prettier..."
+    npx prettier --write "src/**/*.{js,jsx}" --loglevel error 2>/dev/null
+    
+    echo "Checking formatting..."
+    if npx prettier --check "src/**/*.{js,jsx}" --loglevel error 2>/dev/null; then
+        echo "Formatting: OK"
+    else
+        echo "Formatting issues found!"
+        exit 1
+    fi
+    
+    # ESLint check (non-blocking for now)
+    if [ -f ".eslintrc.json" ]; then
+        echo "Running ESLint..."
+        npx eslint "src/**/*.{js,jsx}" --quiet 2>/dev/null && echo "ESLint: OK" || echo "ESLint issues found (not blocking)"
+    fi
+    
+    cd ..
+    echo ""
+else
+    echo "Client directory not found"
+    echo ""
+fi
+
+# Server checks
+echo "2.Checking server..."
+if [ -d "server" ]; then
+    cd server
+    
+    if [ -f ".eslintrc.json" ]; then
+        echo "Running ESLint..."
+        npx eslint "**/*.js" --quiet 2>/dev/null && echo "ESLint: OK" || echo "No ESLint issues or not configured"
+    else
+        echo "No ESLint config found"
+    fi
+    
+    cd ..
+    echo ""
+else
+    echo "Server directory not found"
+    echo ""
+fi
+
+echo "========================================"
+echo "All checks completed! Ready to commit."
+echo "========================================"

@@ -14,19 +14,30 @@
     "multer-gridfs-storage": "^5.0.2",
     "npx": "^10.2.2"
   },
+  "type": "module",
   "name": "node",
   "version": "1.0.0",
   "description": "**Fullstack Social Netwoking Service** - A full-featured app built with the MERN stack (MongoDB, Express, React, Node). The app is responsive, supports light/dark themes, and implements full user functionality: authentication, profiles, posts, comments, likes, following, notifications, and media uploads.",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "husky": "^8.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "react-scripts test --watchAll=false",
+    "start": "node index.js",
+    "prepare": "husky install",
+    "build": "react-scripts build",
+    "lint": "eslint '**/*.js' --fix"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fwrwxx/fullstack-mern-app.git"
