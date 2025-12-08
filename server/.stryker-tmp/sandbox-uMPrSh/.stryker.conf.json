@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "reporters": ["progress", "clear-text"],
+  "testRunner": "jest",
+  "coverageAnalysis": "off",
+
+  "jest": {
+    "projectType": "custom",
+    "config": {
+      "testEnvironment": "node",
+      "testMatch": ["**/tests/**/*.test.js"],
+      "transform": {
+        "^.+\\.js$": "babel-jest"
+      }
+    }
+  },
+
+  "mutate": ["controllers/auth.js"],
+  "tempDirName": ".stryker-tmp",
+  "cleanTempDir": true,
+  "timeoutMS": 10000,
+  "timeoutFactor": 2
+}
