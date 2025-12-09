@@ -148,9 +148,40 @@ in progress
 
 ## Testing
 
-* Add unit tests for critical backend logic (auth, permissions).
-* Add integration tests for API endpoints.
-* For frontend, write a few smoke tests (react-testing-library) for key flows: login, posting, feed display.
+### 1. Unit Tests
+**9 tests, 44.66% coverage**
+- controllers/auth.js: 81.81% (2 tests)
+- controllers/users.js: 20.58% (2 tests)
+- controllers/posts.js: 25% (2 tests)
+- middleware/auth.js: 81.81% (1 test)
+- models/User.js: 100% (2 tests)
+
+### 2. Integration Tests
+**2 test scenarios**
+- Auth API: registration and login
+- Users API: profile retrieval
+
+### 3. End-to-End Tests
+**Complete user workflow**
+- Registration → Login → Profile → Posts
+
+### 4. Mutation Testing
+**Configured, but technical issues encountered**
+- Stryker configuration created
+- Jest integration issues identified
+
+### Analysis of Test Suite Effectiveness
+
+Strengths
+1. High authentication-related test coverage (81.81%)
+2. Complete coverage of data models (100%)
+3. Several real defects detected during testing (unexpected 404/200 responses)
+
+Weaknesses
+1. Low coverage of users.js (20.58%)
+2. No tests for file upload functionality
+3. Unresolved issues with mutation testing setup
+
 
 ## Deployment
 
