@@ -65,12 +65,12 @@ This project is a social networking web application implementing typical social 
 
 * Single RESTful API served by Express
 * MongoDB models: `User`, `Post`, `Comment`, `Follow`, `Notification`
-* Class Diagram:
-   ![alt text](image-2.png)
+* Class Diagram
+   <img width="1503" height="1044" alt="image" src="https://github.com/user-attachments/assets/80c91dda-db05-4132-9154-2cc9a1e71739" />
 * Sequence Diagram
-  ![alt text](image-1.png)
+  <img width="1220" height="1019" alt="image" src="https://github.com/user-attachments/assets/28e14798-4610-4570-b8ec-54befa148bc0" />
 * Component Diagram
-  ![alt text](image-3.png)
+  <img width="1258" height="966" alt="image" src="https://github.com/user-attachments/assets/20e69dca-2867-4462-bd7a-bbd9a1e63147" />
 
 ## Getting Started
 
@@ -153,40 +153,9 @@ in progress
 
 ## Testing
 
-### 1. Unit Tests
-**9 tests, 44.66% coverage**
-- controllers/auth.js: 81.81% (2 tests)
-- controllers/users.js: 20.58% (2 tests)
-- controllers/posts.js: 25% (2 tests)
-- middleware/auth.js: 81.81% (1 test)
-- models/User.js: 100% (2 tests)
-
-### 2. Integration Tests
-**2 test scenarios**
-- Auth API: registration and login
-- Users API: profile retrieval
-
-### 3. End-to-End Tests
-**Complete user workflow**
-- Registration → Login → Profile → Posts
-
-### 4. Mutation Testing
-**Configured, but technical issues encountered**
-- Stryker configuration created
-- Jest integration issues identified
-
-### Analysis of Test Suite Effectiveness
-
-Strengths
-1. High authentication-related test coverage (81.81%)
-2. Complete coverage of data models (100%)
-3. Several real defects detected during testing (unexpected 404/200 responses)
-
-Weaknesses
-1. Low coverage of users.js (20.58%)
-2. No tests for file upload functionality
-3. Unresolved issues with mutation testing setup
-
+* Add unit tests for critical backend logic (auth, permissions).
+* Add integration tests for API endpoints.
+* For frontend, write a few smoke tests (react-testing-library) for key flows: login, posting, feed display.
 
 ## Deployment
 
@@ -208,4 +177,4 @@ Author: Olha Shtyfliuk - `shtyfliuko@gmail.com`
 
 ---
 
-*Last updated: 19-11-2025*
+*Last updated: 14-12-2025*

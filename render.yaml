@@ -1,0 +1,20 @@
+# render.yaml
+services:
+  - type: web
+    name: mern-social-app
+    env: node
+    plan: free
+    region: kyiv
+    buildCommand: npm ci && npm run build
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: false
