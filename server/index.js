@@ -47,10 +47,38 @@ const upload = multer({ storage });
 app.post('/auth/register', upload.single('picture'), register);
 app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
+app.post('/api/test/post', async (req, res) => {
+  try {
+    const post = new Post({
+      title: "Test " + Date.now(),
+      content: "Load test content",
+      userId: "test_user"
+    });
+    await post.save();
+    res.json({ success: true, id: post._id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /* ROUTES */
 app.use('/auth', authroutes);
 app.use('/users', usersRoutes);
 app.use('/posts', postsRoutes);
+
+/* TEST ROUTES */
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+app.get('/api/posts', async (req, res) => {
+  try {
+    const posts = await Post.find().limit(10);
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
