@@ -36,12 +36,20 @@ app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/assets');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
 });
 const upload = multer({ storage });
+
+/* HEALTH CHECK */
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy', 
+    timestamp: new Date().toISOString() 
+  });
+});
 
 /* ROUTES WITH FILES */
 app.post('/auth/register', upload.single('picture'), register);
@@ -53,15 +61,16 @@ app.use('/users', usersRoutes);
 app.use('/posts', postsRoutes);
 
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-    /* ADD DATA ONE TIME */
-    // User.insertMany(users);
-    // Post.insertMany(posts);
-}).catch((error) => console.log(`${error} did not connect`));
-
+const PORT = process.env.PORT || 3001;
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port: ${PORT}`);
+      console.log(`MongoDB connected successfully`);
+      console.log(`Health check available at: http://localhost:${PORT}/health`);
+    });
+  })
+  .catch((error) => {
+    console.error(`MongoDB connection error: ${error.message}`);
+    process.exit(1);
+  });

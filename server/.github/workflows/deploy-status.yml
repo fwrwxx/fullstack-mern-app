@@ -1,0 +1,24 @@
+name: Deploy Status Monitor
+
+on:
+  deployment_status:
+    branches: [ main, master ]
+
+jobs:
+  monitor-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check deployment status
+      run: |
+        DEPLOY_STATUS="${{ github.event.deployment_status.state }}"
+        DEPLOY_URL="${{ github.event.deployment_status.target_url }}"
+        
+        echo "Deployment Status: $DEPLOY_STATUS"
+        echo "Deployment URL: $DEPLOY_URL"
+        
+        if [ "$DEPLOY_STATUS" = "success" ]; then
+          echo "✅ Deployment successful!"
+        elif [ "$DEPLOY_STATUS" = "failure" ]; then
+          echo "❌ Deployment failed!"
+          exit 1
+        fi

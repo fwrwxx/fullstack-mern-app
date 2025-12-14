@@ -65,7 +65,7 @@ This project is a social networking web application implementing typical social 
 
 * Single RESTful API served by Express
 * MongoDB models: `User`, `Post`, `Comment`, `Follow`, `Notification`
-* Class Diagram:
+* Class Diagram
    <img width="1503" height="1044" alt="image" src="https://github.com/user-attachments/assets/80c91dda-db05-4132-9154-2cc9a1e71739" />
 * Sequence Diagram
   <img width="1220" height="1019" alt="image" src="https://github.com/user-attachments/assets/28e14798-4610-4570-b8ec-54befa148bc0" />
