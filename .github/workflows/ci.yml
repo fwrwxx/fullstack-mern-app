@@ -10,6 +10,10 @@ jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     
+    defaults:
+      run:
+        working-directory: ./server
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -19,6 +23,7 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
+        cache-dependency-path: './server/package-lock.json'
 
     - name: Install dependencies
       run: npm ci
@@ -44,9 +49,8 @@ jobs:
         npm start &
         SERVER_PID=$!
         
-        sleep 8
+        sleep 10
         
-        # Перевіряємо health endpoint
         if curl -f http://localhost:3001/health; then
           echo "Server is running correctly"
           kill $SERVER_PID 2>/dev/null || true
