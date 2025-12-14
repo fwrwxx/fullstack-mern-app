@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MERN Social Network
 
 **Fullstack Social Netwoking Service** - A full-featured app built with the MERN stack (MongoDB, Express, React, Node). The app is responsive, supports light/dark themes, and implements full user functionality: authentication, profiles, posts, comments, likes, following, notifications, and media uploads.
