@@ -43,10 +43,10 @@
     "@stryker-mutator/core": "^9.4.0",
     "@stryker-mutator/jest-runner": "^9.4.0",
     "babel-jest": "^30.2.0",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
     "jest": "^29.5.0",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^15.5.2",
     "mongodb-memory-server": "^8.15.0",
     "nodemon": "^2.0.22",
     "prettier": "^3.7.4",
@@ -74,6 +74,8 @@
     ]
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
